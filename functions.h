@@ -28,8 +28,9 @@ void jogo(){
     int turno = 1; // 1 = X | 2 = O
     int rodada = 1 ;
     inicia_tabuleiro(tabuleiro);
+    int estado_deJogo = 1;
 
-    while(rodada != 9){
+    while(rodada != 10 && estado_deJogo == 1){
     limparTela();
 
     exibe_tabuleiro(tabuleiro);
@@ -46,8 +47,39 @@ void jogo(){
         tabuleiro[linha_jogada][coluna_jogada] = 'O';
         turno = 1;
     }
+    ///Linhas
+    for (int i = 0; i < 3; i++){
+       //Linhas
+       if(tabuleiro[i][0] == 'X' && tabuleiro[i][0] == tabuleiro[i][1] && tabuleiro[i][1] == tabuleiro[i][2]){
+        estado_deJogo = 0;
+        cout << "Jogador X venceu";
+       } else if (tabuleiro[i][0] == 'O' && tabuleiro[i][0] == tabuleiro[i][1] && tabuleiro[i][1] == tabuleiro[i][2]){
+        estado_deJogo = 0;
+        cout << "Jogador O venceu";
+       }
+    }
+    ///Colunas
+    for (int i = 0; i < 3; i++){
+       //Colunas
+       if(tabuleiro[0][i] == 'X' && tabuleiro[0][i] == tabuleiro[1][i] && tabuleiro[1][i] == tabuleiro[2][i]){
+        estado_deJogo = 0;
+        cout << "Jogador X venceu";
+       } else if (tabuleiro[0][i] == 'O' && tabuleiro[0][i] == tabuleiro[1][i] && tabuleiro[1][i] == tabuleiro[2][i]){
+        estado_deJogo = 0;
+        cout << "Jogador O venceu";
+       }
+    }
+
+
+
+
+
+
+
     rodada++;
     }
+    cout << "\n";
+    exibe_tabuleiro(tabuleiro);
     cout << "\nfim de jogo\n";
 }
 
