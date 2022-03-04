@@ -26,15 +26,14 @@ void jogo(){
 
     int linha_jogada, coluna_jogada; //Posicao que o jogador posiciona
     int turno = 1; // 1 = X | 2 = O
-    int estado_de_jogo = 1;
-
+    int rodada = 1 ;
     inicia_tabuleiro(tabuleiro);
 
-    while(estado_de_jogo > 0){
+    while(rodada != 9){
     limparTela();
 
     exibe_tabuleiro(tabuleiro);
-
+    cout << "\nRodada: " << rodada << "\n";
     cout << "Digite uma linha: ";
     cin >> linha_jogada;
     cout << "\nDigite uma coluna: ";
@@ -47,9 +46,9 @@ void jogo(){
         tabuleiro[linha_jogada][coluna_jogada] = 'O';
         turno = 1;
     }
-
-
+    rodada++;
     }
+    cout << "\nfim de jogo\n";
 }
 
 
