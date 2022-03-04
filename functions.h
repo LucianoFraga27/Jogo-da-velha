@@ -25,7 +25,7 @@ void jogo(){
     char tabuleiro[3][3];       //tabuleiro
 
     int linha_jogada, coluna_jogada; //Posicao que o jogador posiciona
-
+    int turno = 1; // 1 = X | 2 = O
     int estado_de_jogo = 1;
 
     inicia_tabuleiro(tabuleiro);
@@ -40,7 +40,14 @@ void jogo(){
     cout << "\nDigite uma coluna: ";
     cin >> coluna_jogada;
 
-    tabuleiro[linha_jogada][coluna_jogada] = 'x';
+    if(turno == 1) {
+        tabuleiro[linha_jogada][coluna_jogada] = 'X';
+        turno ++;
+    } else {
+        tabuleiro[linha_jogada][coluna_jogada] = 'O';
+        turno = 1;
+    }
+
 
     }
 }
