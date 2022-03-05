@@ -66,6 +66,7 @@ void jogo(){
     int rodada = 1 ;
     inicia_tabuleiro(tabuleiro);
     int estado_deJogo = 1;
+    bool jogada_feita;
 
     cout << "\nDigite o nome do primeiro jogador(X): ";
     cin >> nome1;
@@ -76,25 +77,33 @@ void jogo(){
         limparTela();
         exibe_tabuleiro(tabuleiro);
         cout << "\nRodada: " << rodada << "\n";
-        if(turno == 1) {
-            cout << nome1 << "\n";
-            cout << "Digite uma linha: ";
-            cin >> linha_jogada;
-            cout << "\nDigite uma coluna: ";
-            cin >> coluna_jogada;
-        } else {
-            cout << nome2 << "\n";
-            cout << "Digite uma linha: ";
-            cin >> linha_jogada;
-            cout << "\nDigite uma coluna: ";
-            cin >> coluna_jogada;
-        }
-        if(turno == 1) {
-            tabuleiro[linha_jogada][coluna_jogada] = 'X';
-            turno ++;
-        } else {
-            tabuleiro[linha_jogada][coluna_jogada] = 'O';
-            turno = 1;
+
+        jogada_feita = false;
+        while (jogada_feita == false){
+            if(turno == 1) {
+                cout << nome1 << "\n";
+                cout << "Digite uma linha: ";
+                cin >> linha_jogada;
+                cout << "\nDigite uma coluna: ";
+                cin >> coluna_jogada;
+            } else {
+                cout << nome2 << "\n";
+                cout << "Digite uma linha: ";
+                cin >> linha_jogada;
+                cout << "\nDigite uma coluna: ";
+                cin >> coluna_jogada;
+            }
+             ///verifica se a posição ainda nao foi jogada
+            if(tabuleiro[linha_jogada][coluna_jogada] == '-'){
+                jogada_feita = true;
+                if(turno == 1) {
+                    tabuleiro[linha_jogada][coluna_jogada] = 'X';
+                    turno ++;
+                } else {
+                    tabuleiro[linha_jogada][coluna_jogada] = 'O';
+                    turno = 1;
+                }
+            }
         }
         if(confere_tabuleiro(tabuleiro) == 1) {
            cout << "O jogador " << nome1 <<  " venceu";
@@ -128,9 +137,7 @@ void jogo(){
         cout << "\n\n\nsaindo...\n\n\n";
         break;
     }
-
 }
-
 
 void menuInicial() {
     int opcao = 0;
