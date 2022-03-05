@@ -19,6 +19,46 @@ void exibe_tabuleiro(char tabuleiro[3][3]){
         cout << "\n";
     }
 }
+
+//1 = x , 2 = O , 0 = velha
+int confere_tabuleiro (char tabuleiro[3][3]) {
+
+     ///Linhas
+    for (int i = 0; i < 3; i++){
+       //Linhas
+       if(tabuleiro[i][0] == 'X' && tabuleiro[i][0] == tabuleiro[i][1] && tabuleiro[i][1] == tabuleiro[i][2]){
+        return 1;
+       } else if (tabuleiro[i][0] == 'O' && tabuleiro[i][0] == tabuleiro[i][1] && tabuleiro[i][1] == tabuleiro[i][2]){
+        return 2;
+       }
+    }
+    ///Colunas
+    for (int i = 0; i < 3; i++){
+       //Colunas
+       if(tabuleiro[0][i] == 'X' && tabuleiro[0][i] == tabuleiro[1][i] && tabuleiro[1][i] == tabuleiro[2][i]){
+        return 1;
+       } else if (tabuleiro[0][i] == 'O' && tabuleiro[0][i] == tabuleiro[1][i] && tabuleiro[1][i] == tabuleiro[2][i]){
+        return 2;
+       }
+    }
+    ///Diagonal principal
+    if(tabuleiro[0][0] != '-' && tabuleiro[0][0] == tabuleiro[1][1] && tabuleiro[1][1] == tabuleiro [2][2]){
+        if(tabuleiro[0][0] == 'X'){
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+    ///Diagonal secundaria
+    if(tabuleiro[0][2] != '-' && tabuleiro[0][2] == tabuleiro[1][1] && tabuleiro[1][1] == tabuleiro [2][0]){
+        if(tabuleiro[0][2] == 'X'){
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+}
+
 void jogo(){
 
     ///variaveis gerais
@@ -47,34 +87,14 @@ void jogo(){
         tabuleiro[linha_jogada][coluna_jogada] = 'O';
         turno = 1;
     }
-    ///Linhas
-    for (int i = 0; i < 3; i++){
-       //Linhas
-       if(tabuleiro[i][0] == 'X' && tabuleiro[i][0] == tabuleiro[i][1] && tabuleiro[i][1] == tabuleiro[i][2]){
+
+    if(confere_tabuleiro(tabuleiro) == 1) {
+        cout << "O jogado 'X' venceu";
         estado_deJogo = 0;
-        cout << "Jogador X venceu";
-       } else if (tabuleiro[i][0] == 'O' && tabuleiro[i][0] == tabuleiro[i][1] && tabuleiro[i][1] == tabuleiro[i][2]){
+    } else if (confere_tabuleiro(tabuleiro) == 2){
+        cout << "O jogado 'O' venceu";
         estado_deJogo = 0;
-        cout << "Jogador O venceu";
-       }
     }
-    ///Colunas
-    for (int i = 0; i < 3; i++){
-       //Colunas
-       if(tabuleiro[0][i] == 'X' && tabuleiro[0][i] == tabuleiro[1][i] && tabuleiro[1][i] == tabuleiro[2][i]){
-        estado_deJogo = 0;
-        cout << "Jogador X venceu";
-       } else if (tabuleiro[0][i] == 'O' && tabuleiro[0][i] == tabuleiro[1][i] && tabuleiro[1][i] == tabuleiro[2][i]){
-        estado_deJogo = 0;
-        cout << "Jogador O venceu";
-       }
-    }
-
-
-
-
-
-
 
     rodada++;
     }
