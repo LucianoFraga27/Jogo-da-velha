@@ -80,6 +80,8 @@ void jogo(){
 
         jogada_feita = false;
         while (jogada_feita == false){
+            limparTela();
+            exibe_tabuleiro(tabuleiro);
             if(turno == 1) {
                 cout << nome1 << "\n";
                 cout << "Digite uma linha: ";
@@ -105,6 +107,7 @@ void jogo(){
                 }
             }
         }
+        limparTela();
         if(confere_tabuleiro(tabuleiro) == 1) {
            cout << "O jogador " << nome1 <<  " venceu";
             estado_deJogo = 0;
@@ -116,16 +119,19 @@ void jogo(){
     }
     cout << "\n";
     exibe_tabuleiro(tabuleiro);
-    cout << "\nfim de jogo\n";
+    cout << "\nfim de jogo\n\n\n";
 
     int opcao ;
 
     cout << "Deseja reiniciar o jogo? ";
-    cout << "\n 1 - sim \n";
+    cout << "\n 1 - Reiniciar \n";
     cout << " 2 - Menu principal";
     cout << "\n 3 - sair";
+    cout << "  ";
     cin >> opcao;
-
+    cout << "\n\n\n;
+    system("pause");
+    limparTela();
     switch(opcao){
     case 1:
         jogo();
