@@ -3,6 +3,7 @@ void menuInicial();
 void limparTela() {
     system("cls");
 }
+
 void inicia_tabuleiro(char tabuleiro[3][3]) {
     for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
@@ -10,8 +11,8 @@ void inicia_tabuleiro(char tabuleiro[3][3]) {
             }
         }
 }
-void exibe_tabuleiro(char tabuleiro[3][3]){
 
+void exibe_tabuleiro(char tabuleiro[3][3]){
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
             cout << tabuleiro[i][j] << " ";
@@ -22,10 +23,8 @@ void exibe_tabuleiro(char tabuleiro[3][3]){
 
 //1 = x , 2 = O , 0 = velha
 int confere_tabuleiro (char tabuleiro[3][3]) {
-
      ///Linhas
     for (int i = 0; i < 3; i++){
-       //Linhas
        if(tabuleiro[i][0] == 'X' && tabuleiro[i][0] == tabuleiro[i][1] && tabuleiro[i][1] == tabuleiro[i][2]){
         return 1;
        } else if (tabuleiro[i][0] == 'O' && tabuleiro[i][0] == tabuleiro[i][1] && tabuleiro[i][1] == tabuleiro[i][2]){
@@ -34,7 +33,6 @@ int confere_tabuleiro (char tabuleiro[3][3]) {
     }
     ///Colunas
     for (int i = 0; i < 3; i++){
-       //Colunas
        if(tabuleiro[0][i] == 'X' && tabuleiro[0][i] == tabuleiro[1][i] && tabuleiro[1][i] == tabuleiro[2][i]){
         return 1;
        } else if (tabuleiro[0][i] == 'O' && tabuleiro[0][i] == tabuleiro[1][i] && tabuleiro[1][i] == tabuleiro[2][i]){
@@ -60,7 +58,6 @@ int confere_tabuleiro (char tabuleiro[3][3]) {
 }
 
 void jogo(){
-
     ///variaveis gerais
     char tabuleiro[3][3];       //tabuleiro
     string nome1,nome2;
@@ -76,46 +73,62 @@ void jogo(){
     cin >> nome2;
 
     while(rodada != 10 && estado_deJogo == 1){
-    limparTela();
-
-    exibe_tabuleiro(tabuleiro);
-    cout << "\nRodada: " << rodada << "\n";
-    if(turno == 1) {
-        cout << nome1 << "\n";
-        cout << "Digite uma linha: ";
-        cin >> linha_jogada;
-        cout << "\nDigite uma coluna: ";
-        cin >> coluna_jogada;
-    } else {
-        cout << nome2 << "\n";
-        cout << "Digite uma linha: ";
-        cin >> linha_jogada;
-        cout << "\nDigite uma coluna: ";
-        cin >> coluna_jogada;
-    }
-
-
-    if(turno == 1) {
-        tabuleiro[linha_jogada][coluna_jogada] = 'X';
-        turno ++;
-    } else {
-        tabuleiro[linha_jogada][coluna_jogada] = 'O';
-        turno = 1;
-    }
-
-    if(confere_tabuleiro(tabuleiro) == 1) {
-       cout << "O jogador " << nome1 <<  " venceu";
-        estado_deJogo = 0;
-    } else if (confere_tabuleiro(tabuleiro) == 2){
-        cout << "O jogador " << nome2 <<  " venceu";
-        estado_deJogo = 0;
-    }
-
-    rodada++;
+        limparTela();
+        exibe_tabuleiro(tabuleiro);
+        cout << "\nRodada: " << rodada << "\n";
+        if(turno == 1) {
+            cout << nome1 << "\n";
+            cout << "Digite uma linha: ";
+            cin >> linha_jogada;
+            cout << "\nDigite uma coluna: ";
+            cin >> coluna_jogada;
+        } else {
+            cout << nome2 << "\n";
+            cout << "Digite uma linha: ";
+            cin >> linha_jogada;
+            cout << "\nDigite uma coluna: ";
+            cin >> coluna_jogada;
+        }
+        if(turno == 1) {
+            tabuleiro[linha_jogada][coluna_jogada] = 'X';
+            turno ++;
+        } else {
+            tabuleiro[linha_jogada][coluna_jogada] = 'O';
+            turno = 1;
+        }
+        if(confere_tabuleiro(tabuleiro) == 1) {
+           cout << "O jogador " << nome1 <<  " venceu";
+            estado_deJogo = 0;
+        } else if (confere_tabuleiro(tabuleiro) == 2){
+            cout << "O jogador " << nome2 <<  " venceu";
+            estado_deJogo = 0;
+        }
+        rodada++;
     }
     cout << "\n";
     exibe_tabuleiro(tabuleiro);
     cout << "\nfim de jogo\n";
+
+    int opcao ;
+
+    cout << "Deseja reiniciar o jogo? ";
+    cout << "\n 1 - sim \n";
+    cout << " 2 - Menu principal";
+    cout << "\n 3 - sair";
+    cin >> opcao;
+
+    switch(opcao){
+    case 1:
+        jogo();
+        break;
+    case 2:
+        menuInicial();
+        break;
+    default:
+        cout << "\n\n\nsaindo...\n\n\n";
+        break;
+    }
+
 }
 
 
@@ -140,10 +153,13 @@ void menuInicial() {
         case 2:
             limparTela();
             cout << "Sobre o jogo: \n";
+            cout << "\n\nJogo desenvolvido por Luciano Fraga no objetivo de aprimorar seus conhecimentos em c,c++\n\n";
+            system("pause");
+            menuInicial();
             break;
         case 3:
             limparTela();
-            cout << "Saindo... \n";
+            cout << "\n\n\nSaindo...\n\n\n";
             break;
         }
     }
