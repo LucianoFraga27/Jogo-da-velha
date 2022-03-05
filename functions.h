@@ -63,22 +63,37 @@ void jogo(){
 
     ///variaveis gerais
     char tabuleiro[3][3];       //tabuleiro
-
+    string nome1,nome2;
     int linha_jogada, coluna_jogada; //Posicao que o jogador posiciona
     int turno = 1; // 1 = X | 2 = O
     int rodada = 1 ;
     inicia_tabuleiro(tabuleiro);
     int estado_deJogo = 1;
 
+    cout << "\nDigite o nome do primeiro jogador(X): ";
+    cin >> nome1;
+    cout << "\nDigite o nome do segundo jogador(O): ";
+    cin >> nome2;
+
     while(rodada != 10 && estado_deJogo == 1){
     limparTela();
 
     exibe_tabuleiro(tabuleiro);
     cout << "\nRodada: " << rodada << "\n";
-    cout << "Digite uma linha: ";
-    cin >> linha_jogada;
-    cout << "\nDigite uma coluna: ";
-    cin >> coluna_jogada;
+    if(turno == 1) {
+        cout << nome1 << "\n";
+        cout << "Digite uma linha: ";
+        cin >> linha_jogada;
+        cout << "\nDigite uma coluna: ";
+        cin >> coluna_jogada;
+    } else {
+        cout << nome2 << "\n";
+        cout << "Digite uma linha: ";
+        cin >> linha_jogada;
+        cout << "\nDigite uma coluna: ";
+        cin >> coluna_jogada;
+    }
+
 
     if(turno == 1) {
         tabuleiro[linha_jogada][coluna_jogada] = 'X';
@@ -89,10 +104,10 @@ void jogo(){
     }
 
     if(confere_tabuleiro(tabuleiro) == 1) {
-        cout << "O jogado 'X' venceu";
+       cout << "O jogador " << nome1 <<  " venceu";
         estado_deJogo = 0;
     } else if (confere_tabuleiro(tabuleiro) == 2){
-        cout << "O jogado 'O' venceu";
+        cout << "O jogador " << nome2 <<  " venceu";
         estado_deJogo = 0;
     }
 
